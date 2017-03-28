@@ -1,0 +1,17 @@
+body {
+font-family: 'Roboto', sans-serif;
+}
+
+.logo {
+	text-align: center;
+	font-size: xx-large;
+	vertical-align: middle;	
+}
+
+.top-buffer { margin-top:20px; }
+
+.header-row {
+	background-color: LightGray;
+	background-color:#ccf3ff;
+	border-radius:30px;
+}

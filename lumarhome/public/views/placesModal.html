@@ -1,0 +1,18 @@
+<div>
+  <div class="modal-header">
+      <h3 class="modal-title">Add Place</h3>
+  </div>
+
+	<div class="modal-body">
+       Add Place:
+       <br/>
+         <div class="animated fadeIn">
+			<input type="text" id="newPlace" class="form-control" placeholder="Add Place"  ng-model="newPlace" step="any" required>
+         </div>
+     </div>
+
+  <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="addPlace()">Add</button>
+      <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+</div>

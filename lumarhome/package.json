@@ -1,0 +1,32 @@
+{
+  "name": "NodePlusAngularJS",
+  "version": "0.1.0",
+  "description": "NodePlusAngularJS",
+  "main": "hello-from-nodejs-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1",
+    "start": "node --harmony-async-await index"
+  },
+  "repository": "",
+  "keywords": [
+    "node.js",
+    "eclipse",
+    "nodeclipse"
+  ],
+  "author": "",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "bootstrap": "^3.3.7",
+    "express": "4.14.1",
+    "lokijs": "^1.4.2",
+    "micro": "latest",
+    "mongodb": "^2.2.24",
+    "node-ifttt-maker": "^0.1.2",
+    "node-yeelight": "^1.0.4",
+    "promises": "^0.2.5",
+    "request": "^2.81.0",
+    "serve-static": "~1.7.0"
+  }
+}

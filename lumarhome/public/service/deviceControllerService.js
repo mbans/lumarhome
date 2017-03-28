@@ -1,0 +1,2 @@
+budgetApp.service('deviceController', function() {
+});

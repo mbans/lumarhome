@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html ng-app="BudgetApp" ng-controller="HomeAutoController">
+
+<head>
+	<!--  For font from Google Web Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css"></link>
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.css"></link>
+	<link rel="stylesheet" href="css/budget.css">
+	<link rel="stylesheet" href="css/homeauto.css">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<title>Lumar's Smart Home Dash Board</title>
+
+<body>
+	<div class="container">
+		<div class="row logo page-header header-row">
+			<p>
+			 <b><h3>LUMAR Smart Board</h3></b>
+			</p>
+		</div>
+		
+				
+		<div  class="row text-center">
+			<div ng-if="discoveringDevices" class="col-md-offset-4 col-md-4  alert alert-info alert-dismissable">
+				<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong nf-if="discoveringDevices">Discovering devices, please wait....</strong>
+			</div>
+			
+			<div ng-if="!discoveringDevices" class="col-md-offset-4 col-md-4  alert alert-info alert-dismissable">
+				<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong nf-if="!discoveringDevices">Discovered {{bulbs.length}} Yee lights, 4 switches</strong>
+			</div>
+		</div>
+		
+		
+		<div class="row text-center">
+				<div class="dropdown">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+						Select Scene
+						<span class="caret"></span>
+					</button>
+									
+					<ul class="dropdown-menu">
+            				<li ng-repeat="scene in scenes">
+            					<a ng-click="setScene(scene)">{{scene.name}}</a>
+            				</li>
+            		</ul>
+				</div>
+				<p>
+				<label ng-if="currentScene">CurrentScene:</label>{{currentScene}}
+		</div>
+		
+		
+		<!-- Displays the Main Content i.e. each light for each room -->				
+		<div ng-repeat="room in roomConfig" class="row text-center top-buffer">
+			<div class="row	">
+				<img src="{{room.image}}"/>
+				<h5>{{room.title}}</h5>
+			</div>
+			
+			
+			<div class="row">
+				<div ng-if="discoveringDevices">
+					Discovering Devices, be patient....
+				</div>
+				
+				<div  ng-if="!discoveringDevices" ng-repeat="light in room.lights">
+					
+						<!-- Display image if we have one -->
+						<img ng-if="light.img" src="{{light.img}}"/> 
+						
+						<!-- Disable the toggle whilst in the process of 'discovering'
+							 Otherwise when we set the initial status then the ng-change will fire
+						 -->
+						 
+					    <!-- Check if this device was 'discovered' -->
+						<!--  <div ng-if="isDiscovered(light.name)">
+							{{light.name}} does not exist					
+						</div> 
+						-->
+								 
+						<toggle onstyle="btn-success" offstyle="btn-danger" on="{{light.displayName}}" off="{{light.displayName}}"   
+							    ng-model="deviceStates[light.name]"
+							    ng-change="toggleLight(light.name, deviceStates[light.name], light.type)"/>
+					</div>
+	
+					<!-- A button for All Lights in the room -->
+					<toggle ng-if="room.lights.length > 1 && !discoveringDevices" onstyle="btn-success" offstyle="btn-danger" on="All" off="All"   ng-model="toggle[room.name]"  ng-change="toggleRoom(room.name, toggle[room.name])"/>
+			</div>
+		</div>	
+		
+		<!-- ------------------------------  ALL IFTTT Panels, maybe delete ------------------------------------------------------ -->
+		<div class="row text-center top-buffer">
+			<form class="form-inline" >
+				<div class="form-group">
+					<input ng-model="iftttService" id="iftttService" type="text" class="form-control">
+				</div>
+				<button type="button" class="btn btn-primary btn-md" ng-click="ifttt(iftttService)" ><img src="static/img/ifttt.png">IFTTT WebService</img></button>
+			</form>
+		</div>
+
+		<div class="row text-center" ng-if="iftttFailure">
+				  <div class="col-md-offset-4 col-md-4   alert alert-danger alert-dismissable">
+					  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					  <strong>Failure running</strong> {{iftttService}}, Reason:{{ifttServiceFailure}}
+				</div>
+		</div>
+
+		<div ng-if="iftttRunning" class="row text-center" id="status">
+				  <div class="col-md-offset-4 col-md-4   alert alert-danger alert-dismissable">
+					  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					  <strong>Running </strong> {{iftttService}}
+				</div>
+		</div>
+		<!-- -------------------------------------------------------------------------------------------------- -->
+		
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="bower_components/angular/angular.min.js" type="text/javascript"></script>
+		<script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>		
+		<script src="bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.js" type="text/javascript"></script>
+		<script src="bower_components/lokijs/src/lokijs.js"></script>
+		<script src="bower_components/lokijs/src/loki-angular.js"></script>
+		<script src="bower_components/http/http.js"></script>
+		<script src="app.js" type="text/javascript"></script>
+		<script src="controller/homeautocontroller.js" type="text/javascript"></script>
+
+		<style>
+		.dropdown {
+		    display: inline-block;
+		}
+		</style>
+		
+		
+</body>
+</html>
