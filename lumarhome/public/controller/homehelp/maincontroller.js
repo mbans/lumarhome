@@ -182,15 +182,7 @@ budgetApp.controller('MainController', ['$scope','uiGridConstants','$http','$uib
 		$scope.energy(onOrOff);
 		$scope.dining(onOrOff);
 	}
-
 	
-
-
-	
-
-	
-
-
 
 	
     	    

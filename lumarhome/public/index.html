@@ -1,135 +1,71 @@
 <!DOCTYPE html>
-<html ng-app="BudgetApp" ng-controller="HomeAutoController">
+<html ng-app="BudgetApp">
+
 <head>
-	<link rel="stylesheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css"></link>
-    
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
 	<!--  For font from Google Web Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="css/budget.css">
+	<!--<link rel="stylesheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css"></link>-->
+	
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-ui-grid-3.2.9/ui-grid.min.css"></link>
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.css"></link>
+	<link rel="stylesheet" href="css/budget.css">
+	<link rel="stylesheet" href="css/homeauto.css">
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-touch.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="bower_components/angular-ui-grid-3.2.9/ui-grid.min.js"></script>
+	<!--<script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>-->
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>		
+	<script src="bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.js" type="text/javascript"></script>
+	<script src="bower_components/lokijs/src/lokijs.js"></script>
+	<script src="bower_components/lokijs/src/loki-angular.js"></script>
+	<script src="bower_components/http/http.js"></script>
+	<script src="app.js" type="text/javascript"></script>
+
+	<!-- HOME -->
+	<script src="controller/home/HomeAutoController.js" type="text/javascript"></script>
+	<script src="controller/home/RoomConfigModalController.js" type="text/javascript"></script>
+	<script src="service/configService.js" type="text/javascript"></script>
+	
+	<!-- Investments -->
+	<script src="controller/investments/InvestmentController.js" type="text/javascript"></script>
+	
+	
+	<style>
+	.dropdown {
+	    display: inline-block;
+	}
+	</style>
+	
 </head>
-<title>Helping Helpers</title>
+<title>Lumar's Dash Board</title>
 
 <body>
-
+		
 	<div class="container">
-		
-		<div class="row jumbotron logo page-header" ng-hide="true">	
-				<p>
-					<h2>
-						<span class="green-text">$</span> 
-						<span>wheresmymoneygone.com</span> 
-						<span class="red-text">?</span>
-					</h2>
-			    </p>
-
-			    <p>
-					<small>| you input | we analyse |</small>
-				</p>
+		<div class="row logo page-header header-row">
+			<p>
+			 <b><h3>LUMAR Smart Board</h3></b>
+			</p>
 		</div>
-	
-
-		<div class="row" ng-if="showAnalysis">
-			<a href ng-click="toggleAnalysis()">Hide Analysis</a></small>
-		</div>	
-		<div class="row" ng-if="!showAnalysis">
-			<a href ng-click="toggleAnalysis()">Show Analysis</a></small>
-		</div>	
 		
-		<div class="row" ng-show="showAnalysis">
-			   <div class="col-sm-4 alert alert-info text-center">
-						<p>This WEEK </p>
-						<p><strong>Outgoings</strong> $? XXXX $? MONTH = YYYY </p>
-						<p><strong>Incoming</strong> $? XXXX $? MONTH = YYYY</p>
-						<p><strong>HotSpots </strong> $? MarketPlace [12345] $? Taste [4567]</p>
-				</div>
-			   <div class="col-sm-4 alert alert-info text-center">
-						<p>This MONTH </p>
-						<p><strong>Outgoings</strong> $? XXXX $? MONTH = YYYY </p>
-						<p><strong>Incoming</strong> $? XXXX $? MONTH = YYYY</p>
-						<p><strong>HotSpots </strong> $? MarketPlace [34343] $? Taste [1212]</p>
-				</div>
-				<div class="col-sm-4 alert alert-info text-center">
-						<p>This YEAR </p>
-						<p><strong>Outgoings</strong> $? XXXX $? MONTH = YYYY </p>
-						<p><strong>Incoming</strong> $? XXXX $? MONTH = YYYY</p>
-						<p><strong>HotSpots </strong> $? MarketPlace [34343] $? Taste [1212]</p>
-				</div>
-				
-		</div>
-
-		<div class = "row">
-			<button ng-click="allLightsOff">Living room off</button>
-			<button ng-click="energy(0)">Energy Off</button>
-			<button ng-click="neon(1)">Neon On</button>
-			<button ng-click="neon(0)">Neon Off</button>
-			<button ng-click="lightsAll(1)">All On</button>
-			<button ng-click="lightsAll(0)">All Off</button>
-		</div>
-
-		<!--  Input Row -->
-		<div class="row">
-			<div class="col-sm-1"></div>
-
-			<!-- The input form for adding items -->
-			<div class="col-sm-10">
-					<form name="itemForm" class="form-inline" ng-submit="addNewItem()">
-	
-					  <!-- date -->
-					  <label for="pwd">Date:</label>
-				      <input type="date" id="date" class="form-control" placeholder="date" ng-model="newItem.date" required>
-						
-					   <!-- place -->
-					   <label for="pwd">Place:</label>
-					   <select ng-model="newItem.item"  class="form-control" placeholder="e.g. Taste" ng-change="changedPlace()" required>
-	 						<option ng-repeat="place in places" value="{{place}}">{{place.name}}</option>
-					    </select>
-	
-	                  <!-- price -->
-	                  <label for="pwd">Price:</label>
-				      <input type="number" id="price" class="form-control" type="number"  ng-model="newItem.price" step="any" required>
-	
-					  <!-- person -->	
-					  <label for="pwd">Who:</label>
-				      <input id="person" type="person" class="form-control" type="text"  ng-model="newItem.person" step="any" required>
-						
-					  <input type="submit" class="btn" ng-disabled="itemForm.$invalid"  />
-				      
-				    </form>
-			</div>
-		    
-			<div class="col-sm-1"></div>
-		</div>	
+		<!-- The routes are defined in app.js -->
+		<a ng-href="#/home" href="#/home">MyHome</a> |
+		<a ng-href="#/home/config" href="#/home/config">MyHome-Conf</a> |
+		<a ng-href="#/investment" href="#/investment">MyInvestments</a> |
+		<a ng-href="#/spending" href="#/spending">MySpending</a>
 		
-		<div class="row"></div>
+		<!-- This is where the template is injected -->
+  		<ng-view></ng-view>
 		
-		<!--  Either shows the grid or the 'no data' message -->	
-		<div class="row topbuffer">
-			<div ng-if="gridOptions.data.length > 0">
-				<span>Total Transactions: {{gridOptions.data.length}}</span>
-				<div class=".row" ui-grid="gridOptions" ui-grid-cellnav></div>
-			</div>
-
-			<div class="jumbotron text-center top-buffer" ng-if="gridOptions.data.length == 0">
-				<p>Why don't you try adding some data :)</p>
-			</div>
-		</div>
-			
-		<script src="bower_components/angular/angular.min.js" type="text/javascript"></script>
-	    <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
-	    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
-	    <script src="bower_components/lokijs/src/lokijs.js"></script>
-		<script src="bower_components/lokijs/src/loki-angular.js"></script>
-		<script src="bower_components/http/http.js"></script>
-		<script src="app.js" type="text/javascript"></script>
-		<script src="controller/maincontroller.js" type="text/javascript"></script>
-		<script src="controller/modalController.js" type="text/javascript"></script>
-		<script src="service/modalService.js" type="text/javascript"></script>
 	</div>
-		
 </body>
 </html>
