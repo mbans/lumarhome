@@ -1,0 +1,17 @@
+Before running LumarHome please ensure that the following are installed on the host:
+
+
+1. Mongo
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install mongodb-server
+sudo service mongodb start
+
+Resource: http://yannickloriot.com/2016/04/install-mongodb-and-node-js-on-a-raspberry-pi/
+
+
+2. Install Node
+curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+sudo apt install nodejs
+
+http://thisdavej.com/beginners-guide-to-installing-node-js-on-a-raspberry-pi/#install-node

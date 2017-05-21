@@ -1,15 +1,15 @@
-use lumarhome
-db.createCollection("roomConfig")
-db.roomConfig.remove({})
-db.roomConfig.insert(
+use lumarhome;
+db.createCollection("roomconfigs");
+db.roomconfigs.remove({})
+db.roomconfigs.insert(
    	 [
    	 	{ "name"   : "livingroom",
    	 	   "title"  :  "LIVING ROOM",
-   	 	   "devices" : [ {"displayName": "Big Light"		, "name" : "livingroom_biglight",    "type" : "yeelight"}, 
-					  	{"displayName": "Little Light"	, "name" : "livingroom_littlelight", "type" : "yeelight"},
-						{"displayName": "Thai Light"	, "name" : "thai_lamp",              "type" : "yeelight"},
-						{"displayName": "Fairy Lights"	, "name" : "fairy_lights", 			 "type" : "switch"},
-						{"displayName": "The LEDs"		, "name" : "strip_light", 					 "type" : "switch"}
+   	 	   "devices" : [ {"displayName": "Big Light"	, "name" : "livingroom_biglight",   	"type" : "yeelight"}, 
+					  	{"displayName": "Little Light"	, "name" : "livingroom_littlelight", 	"type" : "yeelight"},
+						{"displayName": "Thai Light"	, "name" : "thai_lamp",              	"type" : "yeelight"},
+						{"displayName": "Fairy Lights"	, "name" : "fairy_lights", 			 	"type" : "switch"},
+						{"displayName": "The LEDs"		, "name" : "strip_light", 			 	"type" : "switch"}
 					  ],
    		   "image"  : "static/img/living_room50pc.png"
 		}
@@ -53,9 +53,9 @@ db.roomConfig.insert(
 	)
 	
 #Device config
-db.createCollection("deviceConfig")
-db.deviceConfig.remove({})
-db.deviceConfig.insert(
+db.createCollection("deviceconfigs")
+db.deviceconfigs.remove({})
+db.deviceconfigs.insert(
 		[
 			{"name" : "livingroom_biglight",    "displayName" : "Big Light", 	 "type" : "yeelight", "account": "lumarhome"},
 			{"name" : "livingroom_littlelight", "displayName" : "Little Light",  "type" : "yeelight", "account": "lumarhome"},
@@ -72,9 +72,9 @@ db.deviceConfig.insert(
 
 
 #Scene Config
-db.createCollection("sceneConfig")
-db.sceneConfig.remove({})
-db.sceneConfig.insert(
+db.createCollection("sceneconfigs")
+db.sceneconfigs.remove({})
+db.sceneconfigs.insert(
 [   {"name" : "Movies", 
 	 "lights" : [{"name" : "livingroom_biglight"    , "hue" : "180"},
 		 		 {"name" : "livingroom_littlelight" , "hue" : "180"},

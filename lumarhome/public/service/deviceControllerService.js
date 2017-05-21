@@ -1,12 +1,3 @@
 budgetApp.service('deviceController', function() {
-	
-	
-	
-
-
-
-
-
-
 
 });

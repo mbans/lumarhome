@@ -5,21 +5,18 @@
   </div>
 	
   		<div class="modal-body">
-		  <label>Title: <input type="text" ng-model=selectedConfig.title value="{{selectedConfig.title}}"/></label>
-	  		</br>		  
-       		DEVICES:
-	       <br/>
-<!--     	     <div class="animated fadeIn">
-        		 <div class=".row">
-        	 </div>
- -->						
+   		  <label>Title: <input type="text" ng-model=selectedConfig.title ng-change=updated() value="{{selectedConfig.name}}"/></label>
+   		  <label>Name: <input type="text" ng-model=selectedConfig.name ng-change=updated() value="{{selectedConfig.title}}"/></label>
+ 			
 			<div  ng-repeat="device in devicesConfig">
- 				<input type="checkbox" ng-checked="containsDevice(device.name)"> {{device.name}}</input
+ 				<input ng-model=roomDevices[device.name] ng-change=updated() type="checkbox" ng-checked="roomDevices[device.name]">{{device.name}}</input
 			</div>
   		</div>
 	
-  <div class="modal-footer">
-      <button class="btn btn-primary" "button" ng-click="save()">Save</button>
-      <button class="btn btn-warning" type="button" ng-click=	"cancel()">Cancel</button>
-  </div>
+	  <div class="modal-footer">
+	  	  {{message}}
+	      <button class="btn btn-primary" "button" ng-disabled="!configUpdated || noDevicesSelected()" ng-click="save()">Save</button>
+	      <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+	  </div>
+	  
 </div>

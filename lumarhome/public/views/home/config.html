@@ -3,7 +3,7 @@
 		<div class="row text-center">
 			<div  class="col-md-offset-2 col-md-8  alert alert-danger alert-dismissable">
 				<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<strong>Device Controller appears to be down, you will not be able to communicate with your smart devices</strong>
+					<strong>Device Controller appears to be down, you will not be able to communicate with your smart devices</strong>
 			</div>
 		</div>
 	</div>
@@ -22,15 +22,8 @@
 				</div>
 			</div>
 		
-
-			<!-- 	Displays disvovered devices, no need for this really -->		
-			<!-- 		<div class=".row top-buffer">
-					 		<div ui-grid="discoveredDevicesGridOptions" ui-grid-edit ui-grid-cellnav class="grid"></div>
-					 	</div>
-			 -->		
-
 			<div class=".row text-center top-buffer">
-				<button type="button" class="btn btn-primary btn-lg" ng-click=addDevice>Add Device</button>
+				<button type="button" class="btn btn-primary btn-lg" ng-click=addDevice({})>Add Device</button>
 			</div>
 			
 			<!-- DeviceConfig -->
@@ -41,7 +34,7 @@
 		 	
 		 	<!-- Room Config -->
 		 	<div class=".row top-buffer text-center">
-				<button type="button" class="btn btn-primary btn-lg" ng-click=configService.addRoomConifg>Add Room</button>
+				<button type="button" class="btn btn-primary btn-lg" ng-click=viewRoomConfig({})>Add Room</button>
 			</div>
 			
 			<label>ROOM CONFIG</label>

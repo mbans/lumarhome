@@ -137,7 +137,6 @@ budgetApp.controller('HomeAutoController', ['$scope','uiGridConstants','$http', 
 			   return device;
 		   }
 	   }
-	   console.log("No device named " + deviceName);
 	   throw "No device named " + deviceName;
    }
    
@@ -205,17 +204,18 @@ budgetApp.controller('HomeAutoController', ['$scope','uiGridConstants','$http', 
 				method : 'GET',
 			  }).
 		then(function successCallback(success) {
-			$scope.devices = success.data.data;
-//			$scope.discoveredDevicesGridOptions.data=$scope.devices;
 			console.log("Discovered " + $scope.devices.length + " devices");
+			$scope.devices = success.data.data;
 			
 			//Reset the status of all the buttons based on the config just loaded (as it contains the current status)
 			$scope.setDeviceState();
 			$scope.detectProblemDevices();
+			$scope.discoveringDevices=false;
 			callback();
 		},
+		
 		function errorCallback(error) {
-			console.log("Error = " + JSON.stringify(error))
+			$scope.discoveringDevices=false;
 		});
 	};
 	
@@ -296,11 +296,16 @@ budgetApp.controller('HomeAutoController', ['$scope','uiGridConstants','$http', 
 		$scope.discoveringDevices=true
 
 		$scope.loadConfig(function() {
-			$scope.discoverDevices(function() {
-				$scope.discoveringDevices=false;
-				//Enrich the deviceConfig with a 'state' that is derived from the discovered devices
-				$scope.enrichDeviceConfigWithState();
-			});
+			$scope.discoverDevices(
+						function() {
+							$scope.discoveringDevices=false;
+							$scope.enrichDeviceConfigWithState();
+						},
+						//ErrorCallback
+						function() {
+							$scope.discoveringDevices=false;
+						}
+			);
 		});
 	};
 	

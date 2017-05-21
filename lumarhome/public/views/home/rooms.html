@@ -8,95 +8,91 @@
 	</div>
 
 
-	<div ng-show="!deviceControllerDown">
-
-		
-		<div  class="row text-center">
-			<!-- The different info panels -->
-			<div ng-if="discoveringDevices" class="col-md-offset-4 col-md-4  alert alert-info alert-dismissable">
-				<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				<strong nf-if="discoveringDevices">Discovering devices, please wait....</strong>
-			</div>
-			
-
-			<div ng-if="offlineDevices.length > 0" class="col-md-offset-2 col-md-8  alert alert-danger alert-dismissable">
-				<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				<img  src="static/img/danger-icon.png" /> 		
-				<strong ng-if="offlineDevices.length > 0">Following devices do not appear to be contactable, ensure they are plugged in or configured correctly. Also ensure Device Controller is not sitting behind a Proxy/VPN</strong>
-				{{offlineDevices}}
-			</div>
+	<div  class="row text-center">
+		<!-- The different info panels -->
+		<div ng-if="discoveringDevices" class="col-md-offset-4 col-md-4  alert alert-info alert-dismissable">
+			<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong nf-if="discoveringDevices">Discovering devices, please wait....</strong>
 		</div>
 		
-		<div class="row text-center">
-				<div class="dropdown">
-					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-						Select Scene
-						<span class="caret"></span>
-					</button>
-									
-					<ul class="dropdown-menu">
-            				<li ng-repeat="scene in scenes">
-            					<a ng-click="setScene(scene)">{{scene.name}}</a>
-            				</li>
-            		</ul>
-				</div>
-				<p>
-				<label ng-if="currentScene">CurrentScene:</label>{{currentScene}}
-		</div>
-		
-		
-		<!-- Displays the Main Content i.e. each light for each room -->				
-		<div ng-repeat="room in roomConfig" class="row text-center top-buffer">
-			<div class="row	">
-				<img src="{{room.image}}"/>
-				<h5>{{room.title}}</h5>
-			</div>
-			
-			
-			<div class="row">
-				<div ng-if="discoveringDevices">
-					Discovering Devices, be patient....
-				</div>
-				
-				<div  ng-if="!discoveringDevices" ng-repeat="device in room.devices">
-					
-						<!-- Display image if we have one -->
-						<img ng-if="device.img && !offlineDevices.indexOf(device.name) == -1" src="{{device.img}}"/> 
-						
-						<!-- Offline device -->
-						<img ng-if="offlineDevices.indexOf(device.name) != -1" src="static/img/danger-icon.png" title="Device is offline"/> 
 
-						<toggle onstyle="btn-success" offstyle="btn-danger" on="{{device.displayName}}" off="{{device.displayName}}"   							    
-														ng-model="deviceStates[device.name]"
-													    ng-change="toggleDevice(device.name)"/>
-					</div>
+		<div ng-if="offlineDevices.length > 0" class="col-md-offset-2 col-md-8  alert alert-danger alert-dismissable">
+			<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<img  src="static/img/danger-icon.png" /> 		
+			<strong ng-if="offlineDevices.length > 0">Following devices do not appear to be contactable, ensure they are plugged in or configured correctly. Also ensure Device Controller is not sitting behind a Proxy/VPN</strong>
+			{{offlineDevices}}
+		</div>
+	</div>
 	
-					<!-- A button for All Lights in the room -->
-					<toggle ng-if="room.lights.length > 1 && !discoveringDevices" onstyle="btn-success" offstyle="btn-danger" on="All" off="All"   ng-model="toggle[room.name]"  ng-change="toggleRoom(room.name, toggle[room.name])"/>
+	<div class="row text-center">
+			<div class="dropdown">
+				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+					Select Scene
+					<span class="caret"></span>
+				</button>
+								
+				<ul class="dropdown-menu">
+           				<li ng-repeat="scene in scenes">
+           					<a ng-click="setScene(scene)">{{scene.name}}</a>
+           				</li>
+           		</ul>
 			</div>
-		</div>	
+			<p>
+			<label ng-if="currentScene">CurrentScene:</label>{{currentScene}}
+	</div>
+	
+	
+	<!-- Displays the Main Content i.e. each light for each room -->				
+	<div ng-repeat="room in roomConfig" class="row text-center top-buffer">
+		<div class="row	">
+			<img src="{{room.image}}"/>
+			<h5>{{room.title}}</h5>
+		</div>
 		
-		<!-- ------------------------------  ALL IFTTT Panels, maybe delete ------------------------------------------------------ -->
-		<div class="row text-center top-buffer">
-			<form class="form-inline" >
-				<div class="form-group">
-					<input ng-model="iftttService" id="iftttService" type="text" class="form-control">
-				</div>
-				<button type="button" class="btn btn-primary btn-md" ng-click="ifttt(iftttService)" ><img src="static/img/ifttt.png">IFTTT WebService</img></button>
-			</form>
-		</div>
+		
+		<div class="row">
+			<div ng-if="discoveringDevices">
+				Discovering Devices, be patient....
+			</div>
+			
+			<div  ng-if="!discoveringDevices" ng-repeat="device in room.devices">
+				
+					<!-- Display image if we have one -->
+					<img ng-if="device.img && !offlineDevices.indexOf(device.name) == -1" src="{{device.img}}"/> 
+					
+					<!-- Offline device -->
+					<img ng-if="offlineDevices.indexOf(device.name) != -1" src="static/img/danger-icon.png" title="Device is offline"/> 
 
-		<div class="row text-center" ng-if="iftttFailure">
-				  <div class="col-md-offset-4 col-md-4   alert alert-danger alert-dismissable">
-					  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					  <strong>Failure running</strong> {{iftttService}}, Reason:{{ifttServiceFailure}}
+					<toggle onstyle="btn-success" offstyle="btn-danger" on="{{device.displayName}}" off="{{device.displayName}}"   							    
+													ng-model="deviceStates[device.name]"
+												    ng-change="toggleDevice(device.name)"/>
 				</div>
-		</div>
 
-		<div ng-if="iftttRunning" class="row text-center" id="status">
-				  <div class="col-md-offset-4 col-md-4   alert alert-danger alert-dismissable">
-					  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					  <strong>Running </strong> {{iftttService}}
-				</div>
+				<!-- A button for All Lights in the room -->
+				<toggle ng-if="room.lights.length > 1 && !discoveringDevices" onstyle="btn-success" offstyle="btn-danger" on="All" off="All"   ng-model="toggle[room.name]"  ng-change="toggleRoom(room.name, toggle[room.name])"/>
 		</div>
+	</div>	
+	
+	<!-- ------------------------------  ALL IFTTT Panels, maybe delete ------------------------------------------------------ -->
+	<div class="row text-center top-buffer">
+		<form class="form-inline" >
+			<div class="form-group">
+				<input ng-model="iftttService" id="iftttService" type="text" class="form-control">
+			</div>
+			<button type="button" class="btn btn-primary btn-md" ng-click="ifttt(iftttService)" ><img src="static/img/ifttt.png">IFTTT WebService</img></button>
+		</form>
+	</div>
+
+	<div class="row text-center" ng-if="iftttFailure">
+			  <div class="col-md-offset-4 col-md-4   alert alert-danger alert-dismissable">
+				  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				  <strong>Failure running</strong> {{iftttService}}, Reason:{{ifttServiceFailure}}
+			</div>
+	</div>
+
+	<div ng-if="iftttRunning" class="row text-center" id="status">
+			  <div class="col-md-offset-4 col-md-4   alert alert-danger alert-dismissable">
+				  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				  <strong>Running </strong> {{iftttService}}
+			</div>
 	</div>
