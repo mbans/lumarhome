@@ -68,12 +68,12 @@ db.deviceconfigs.insert(
 			{"name" : "dehumidifier",    		"displayName" : "Dehumidifier",  "type" : "yeelight",	"url":"https://aps1-wap.tplinkcloud.com/?token=8b21ded7-142a33c15ef64708b16e443", "account": "lumarhome"},
 			{"name" : "strip_light",            		"displayName" : "LEDs",          "type" : "yeelight",	"url":"https://aps1-wap.tplinkcloud.com/?token=8b21ded7-142a33c15ef64708b16e443", "account": "lumarhome"}
 		]
-)
+);
 
 
 #Scene Config
-db.createCollection("sceneconfigs")
-db.sceneconfigs.remove({})
+db.createCollection("sceneconfigs");
+db.sceneconfigs.remove({});
 db.sceneconfigs.insert(
 [   {"name" : "Movies", 
 	 "lights" : [{"name" : "livingroom_biglight"    , "hue" : "180"},
