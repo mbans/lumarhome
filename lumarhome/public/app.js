@@ -4,7 +4,7 @@ var budgetApp = angular.module('BudgetApp', ['lokijs','ui.bootstrap','ui.grid','
 
 var LUMARHOME_SERVICE = "http://localhost:1337/";
 //var LUMARHOME_DEVICE_CONTROLLER = "http://localhost:4000";
-var LUMARHOME_DEVICE_CONTROLLER = "http://192.168.0.101:4000/devices";
+var LUMARHOME_DEVICE_CONTROLLER = "http://192.168.0.101:4000";
 
 budgetApp.config(function($routeProvider, $locationProvider) {
 	  $routeProvider
