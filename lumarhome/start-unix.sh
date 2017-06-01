@@ -1,3 +1,4 @@
 pkill node
+pkill nodemom
 cd /home/pi/apps/lumarhome/lumarhome
-node app.js > ../../logs/lumarhome.log
+nodemon app.js > ../../logs/lumarhome.log
