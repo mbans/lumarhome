@@ -1,3 +1,4 @@
+
 use lumarhome;
 db.createCollection("roomconfigs");
 db.roomconfigs.remove({})
@@ -63,10 +64,10 @@ db.deviceconfigs.insert(
 			{"name" : "bedroom_martin",         "displayName" : "Martin's Lamp", "type" : "yeelight", "account": "lumarhome"},
 			{"name" : "bedroom_lucy",           "displayName" : "Lucy's Lamp"  , "type" : "yeelight", "account": "lumarhome"},
 			{"name" : "office_lamp",            "displayName" : "Office Lamp",   "type" : "yeelight", "account": "lumarhome"},
-			{"name" : "fairy_lights",   	    "dispalyName" : "Fairy Light",   "type" : "yeelight",	"url":"https://aps1-wap.tplinkcloud.com/?token=8b21ded7-142a33c15ef64708b16e443", "account": "lumarhome"},
-			{"name" : "oven",            		"displayName" : "Oven", 	     "type" : "yeelight",	"url":"https://aps1-wap.tplinkcloud.com/?token=8b21ded7-142a33c15ef64708b16e443", "account": "lumarhome"},
-			{"name" : "dehumidifier",    		"displayName" : "Dehumidifier",  "type" : "yeelight",	"url":"https://aps1-wap.tplinkcloud.com/?token=8b21ded7-142a33c15ef64708b16e443", "account": "lumarhome"},
-			{"name" : "strip_light",            		"displayName" : "LEDs",          "type" : "yeelight",	"url":"https://aps1-wap.tplinkcloud.com/?token=8b21ded7-142a33c15ef64708b16e443", "account": "lumarhome"}
+			{"name" : "fairy_lights",   	    "dispalyName" : "Fairy Light",   "type" : "yeelight",	"url":"https://aps1-wap.tplinkcloud.com/?token=8b21ded7-b84d8453c9994431a42764c", "account": "lumarhome"},
+			{"name" : "oven",            		"displayName" : "Oven", 	     "type" : "yeelight",	"url":"https://aps1-wap.tplinkcloud.com/?token=8b21ded7-b84d8453c9994431a42764c", "account": "lumarhome"},
+			{"name" : "dehumidifier",    		"displayName" : "Dehumidifier",  "type" : "yeelight",	"url":"https://aps1-wap.tplinkcloud.com/?token=8b21ded7-b84d8453c9994431a42764c", "account": "lumarhome"},
+			{"name" : "strip_light",            		"displayName" : "LEDs",          "type" : "yeelight",	"url":"https://aps1-wap.tplinkcloud.com/?token=8b21ded7-b84d8453c9994431a42764c", "account": "lumarhome"}
 		]
 );
 
